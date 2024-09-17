@@ -1,17 +1,87 @@
-<form id="modificarClienteForm" method="POST" action="{% url 'modificar_perfil' %}">
-    {% csrf_token %}
-    <div class="mb-3">
-        <label for="nombreUsuario" class="form-label">Nombre de Usuario</label>
-        <input type="text" class="form-control" id="nombreUsuario" name="username" value="{{ user.username }}" required>
-    </div>
-    <div class="mb-3">
-        <label for="password" class="form-label">Nueva Contraseña (Opcional)</label>
-        <input type="password" class="form-control" id="password" name="password">
-    </div>
-    <div class="mb-3">
-        <label for="confirmPassword" class="form-label">Confirmar Nueva Contraseña</label>
-        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
-    </div>
-    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-    <button type="reset" class="btn btn-secondary">Limpiar</button>
-</form>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Perfil - TOPGAMES</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'core/css/styles.css' %}">
+</head>
+<body>
+    <header class="container-fluid">
+        <h1>TOPGAMES</h1>
+        <nav>
+            <a href="{% url 'index' %}" class="btn btn-primary">Volver al inicio</a>
+        </nav>
+    </header>
+
+    <main class="container mt-4">
+        <section>
+            <h2>Modificar Datos del Cliente</h2>
+            <form id="modificarPerfilForm" method="POST" action="{% url 'modificar_perfil' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="username" class="form-label">Nombre de Usuario</label>
+                    <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Correo Electrónico</label>
+                    <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña (Opcional)</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                </div>
+                <div class="mb-3">
+                    <label for="confirmPassword" class="form-label">Confirmar Contraseña (Opcional)</label>
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
+                </div>
+                <div class="mb-3">
+                    <label for="direccion" class="form-label">Dirección de Despacho (Opcional)</label>
+                    <input type="text" class="form-control" id="direccion" name="direccion" value="{{ user.cliente.direccion }}">
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                <button type="reset" class="btn btn-secondary">Limpiar</button>
+            </form>
+        </section>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#modificarPerfilForm").validate({
+                rules: {
+                    username: "required",
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: {
+                        minlength: 6,
+                        maxlength: 18
+                    },
+                    confirmPassword: {
+                        equalTo: "#password"
+                    }
+                },
+                messages: {
+                    username: "Por favor, ingresa tu nombre de usuario.",
+                    email: {
+                        required: "Por favor, ingresa tu correo electrónico.",
+                        email: "Por favor, ingresa un correo electrónico válido."
+                    },
+                    password: {
+                        minlength: "La contraseña debe tener al menos 6 caracteres.",
+                        maxlength: "La contraseña no puede exceder los 18 caracteres."
+                    },
+                    confirmPassword: {
+                        equalTo: "Las contraseñas no coinciden."
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
