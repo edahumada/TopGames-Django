@@ -7,7 +7,9 @@ urlpatterns = [
     path('login/', login, name='login'),
     path('carrito/', carrito, name='carrito'),
     path('modificar_perfil/', modificar_perfil, name='modificar_perfil'),
-    
+   
+    path('acaunds/', include ('django.contrib.auth.urls')),
+
     #recuperación de contraseña
     path('password_reset/', auth_views.PasswordResetView.as_view(template_name='core/password_reset.html'), name='password_reset'),
     path('password_reset_done/', auth_views.PasswordResetDoneView.as_view(template_name='core/password_reset_done.html'), name='password_reset_done'),

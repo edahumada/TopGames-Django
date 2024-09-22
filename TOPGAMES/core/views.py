@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login, update_session_auth_hash
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
+
 
 def index(request):
     return render(request, 'core/index.html')
@@ -20,6 +21,20 @@ def login(request):
 
 def carrito(request):
     return render(request, 'core/carrito.html')
+
+@permission_requred('app.delete_product')
+def agregar_productos(request):
+
+@permission_requred('app.delete_product')
+def agregar_productos(request):
+
+@permission_requred('app.delete_product')
+def listas_productos(request, id):
+
+@permission_requred('app.delete_product')
+def eliminar_productos(request,id):
+
+
 
 @login_required
 def modificar_perfil(request):
