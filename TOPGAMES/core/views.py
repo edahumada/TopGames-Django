@@ -2,10 +2,25 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
+from .forms import RegistroClienteForm
 
 
 def index(request):
     return render(request, 'core/index.html')
+
+def registro(request):
+    if request.method == 'post':
+        form = RegistroClienteForm(request.post)
+        if form.is_valid():
+            form.save()
+        return render(request,'core/registro.html')
+    else:
+        form = RegistroClienteForm()
+    contexto = {
+        'form': form,
+        'cliente': request.user
+    }
+    return render(request,'core/registro.html', contexto)
 
 def login(request):
     if request.method == 'POST':
@@ -21,19 +36,6 @@ def login(request):
 
 def carrito(request):
     return render(request, 'core/carrito.html')
-
-@permission_requred('app.delete_product')
-def agregar_productos(request):
-
-@permission_requred('app.delete_product')
-def agregar_productos(request):
-
-@permission_requred('app.delete_product')
-def listas_productos(request, id):
-
-@permission_requred('app.delete_product')
-def eliminar_productos(request,id):
-
 
 
 @login_required
