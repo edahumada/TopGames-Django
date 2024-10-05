@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -85,6 +86,12 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '1521',
     }
+}
+
+REST_FRAMEWORK ={
+    'DEFAULT_AUTENTICARION_CLASSES':[
+        'rest_framework.authentication.tokenAuthentication', #Agrega esta linea para autneticacion de tokens
+    ]
 }
 
 
