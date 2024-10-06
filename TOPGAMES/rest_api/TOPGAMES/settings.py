@@ -89,7 +89,7 @@ DATABASES = {
 }
 
 REST_FRAMEWORK ={
-    'DEFAULT_AUTENTICARION_CLASSES':[
+    'DEFAULT_AUTENTICATION_CLASSES':[
         'rest_framework.authentication.tokenAuthentication', #Agrega esta linea para autneticacion de tokens
     ]
 }
@@ -117,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'UTC'
 
